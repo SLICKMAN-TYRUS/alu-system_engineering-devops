@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# ssh generate key
+Include /etc/ssh/ssh_config.d/*.conf
+
+Host *
+	PasswordAuthentication no
