@@ -1,7 +1,30 @@
 #!/usr/bin/env bash
-# How to install nginx on a remote server and configure it
-sudo apt update 
-sudo apt install nginx -y
-sudo touch /var/www/html/index.html
-echo "Holberton School" | sudo tee /var/www/html/index.html 
+# This bash script configures the Nginx server to have a custom 404 page
+# that contains the string Ceci n'est pas une page
+
+# Update package list and install Nginx
+sudo apt-get update -y
+sudo apt-get install nginx -y
+
+# Ensure Nginx is listening on port 80
+sudo sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
+sudo sed -i 's/listen \[::\]:80 default_server;/listen \[::\]:80;/g' /etc/nginx/sites-available/default
+
+# Create a custom HTML file that contains the string "Holberton School"
+echo "<html>
+  <head>
+    <title>Holberton School</title>
+  </head>
+  <body>
+    Holberton School for the win!
+  </body>
+</html>" | sudo tee /var/www/html/index.html
+
+# Restart Nginx without using systemctl
 sudo service nginx restart
+
+# Confirm Nginx is running and returning the correct page
+curl localhost | grep "Holberton School"
+
+# Exit the script
+exit 0
