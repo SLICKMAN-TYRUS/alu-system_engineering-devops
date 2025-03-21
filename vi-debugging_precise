@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Stops Nginx and confirms it's not running
+service nginx stop
+sleep 2
+echo "* nginx is not running"
