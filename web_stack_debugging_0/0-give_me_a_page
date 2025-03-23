@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# This script installs and starts Apache, then creates a webpage with "Hello Holberton"
+
+# Install Apache
+apt-get update
+apt-get install -y apache2
+
+# Start Apache service
+service apache2 start
+
+# Create the webpage
+echo "Hello Holberton" > /var/www/html/index.html
